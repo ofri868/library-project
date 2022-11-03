@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+{% block title %}Loans{% endblock %}
+{% block head %}
+{{ super() }}
+<style type="text/css">
+  .important {
+    color: #336699;
+  }
+</style>
+{% endblock %}
+{% block content %}
+{%- if history == True %}
+<p class="header">Loan history</p>
+{%- else %}
+<p class="header">Loans</p>
+{% endif %}
+<a class="btn btn-info" href="/loans/add/">Create new loan</a>
+<a class="btn btn-info" href="/loans/late_loans/">Late loans</a>
+{%- if history == True %}
+<a class="btn btn-secondary" href="/loans/">Active loans</a><br>
+{%- else %}
+<a class="btn btn-secondary" href="/loans/-1">Loan history</a><br><br>
+{% endif %}
+{%- if created == True %} <h4 class="important">New loan created</h4> {% endif %}
+{%- if created == False %} <h4 class="error">Can't create loan, book already loaned</h4> {% endif %}
+{%- if customer_inactive == True %} <h4 class="error">Can't create loan, customer is inactive</h4> {% endif %}
+{%- if b_not_found == True %} <h4 class="error">Book not found</h4> {% endif %}
+{%- if c_not_found == True %} <h4 class="error">Customer not found</h4> {% endif %}
+{%- if returned_loan == True %} <h4 class="important">Loan returned successfully</h4> {% endif %}
+<div class="row row-cols-1 row-cols-md-4 g-4">
+  {%- for loan in loans %}
+  <div class="col">
+    <div class="card">
+      <div class="card-body">
+        {%- if loan.book_id != none %}<h3 class="card-title">{{loan.book.book_name}}</h3>
+        {%- else %}<h3 class="card-title">Book deleted</h3>{% endif %}
+        <p class="card-text">Loaned By: {{loan.customer.customer_name}}<br>Return Date: {{loan.returndate}}</p>
+        <a class="btn btn-success" href="/loans/{{loan.loan_id}}">More details</a>
+        <a class="btn btn-success" href="/loans/return/{{loan.loan_id}}">Return</a>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}

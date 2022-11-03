@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+{% block title %}Books {% endblock %}
+{% block head %}
+{{ super() }}
+<style type="text/css">
+  .important {
+    color: #336699;
+  }
+</style>
+{% endblock %}
+{% block content %}
+<p class="header">Books</p>
+<form action="/books/find/" method="post">
+  <label for="bookname">book name:</label><br>
+  <input required="true" type="text" name="bookname">
+  <input class="btn btn-primary" type="submit" value="Search"><br><br>
+  <a class="btn btn-info" href="/books/add/">Add new book</a><br><br>
+{%- if deleted == True %}
+<h4 class="important">Book deleted</h4>
+{% endif %}
+{%- if not_found == True %}
+<h4 class="error">Book not found</h4>
+{% endif %}
+{%- if cant_delete == True %}
+<h4 class="error">Can't delete book, book is currently loaned</h4>
+{% endif %}
+<div class="row row-cols-1 row-cols-md-4 g-4">
+  {%- for book in books %}
+  <div class="col">
+    <div class="card">
+      <img src="https://picsum.photos/20{{book.book_id}}" class="card-img-top">
+      <div class="card-body">
+        <h3 class="card-title">{{book.book_name}}</h3>
+        <a class="btn btn-success" href="/books/{{book.book_id}}">More details</a>
+        <a class="btn btn-danger" href="/books/delete/{{book.book_id}}">Delete</a>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}

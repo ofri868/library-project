@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+{% block title %}Late Loans{% endblock %}
+{% block head %}
+{{ super() }}
+<style type="text/css">
+  .important {
+    color: #336699;
+  }
+  .lateloan{
+    background-color: red;
+  }
+</style>
+{% endblock %}
+{% block content %}
+<p class="header">Late loans</p>
+<a class="btn btn-info" href="/loans/add/">Create new loan</a>
+<a class="btn btn-info" href="/loans/">Active loans</a>
+<a class="btn btn-secondary" href="/loans/-1">Loan history</a><br>
+<div class="row row-cols-1 row-cols-md-4 g-4">
+  {%- for loan in late_loans %}
+  <div class="col">
+    <div class="card" style="background-color:red;">
+      <div class="card-body" >
+        <h3 class="card-title">{{loan.book.book_name}}</h3>
+        <p class="card-text">Loaned By: {{loan.customer.customer_name}}<br>Loan Date: {{loan.loandate}}<br>Return Date: {{loan.returndate}}</p>
+        <a class="btn btn-success" href="/loans/{{loan.loan_id}}">More details</a>
+        <a class="btn btn-success" href="/loans/return/{{loan.loan_id}}">Return</a>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}

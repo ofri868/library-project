@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+{% block title %}New book{% endblock %}
+{% block head %}
+{{ super() }}
+<style type="text/css">
+  .important {
+    color: #336699;
+  }
+</style>
+{% endblock %}
+{% block content %}
+
+<form action="/books/add/" method="post">
+  <label for="bookname">Book name:</label><br>
+  <input required="true" type="text" name="bookname"><br>
+  <label for="author">Author:</label><br>
+  <input required="true" type="text" name="author"><br>
+  <label for="yearpublished">Year published:</label><br>
+  <input required="true" type="number" name="yearpublished"><br>
+  <label for="type">Type:</label><br>
+  <select required="true" name="type" min="1" max="3">
+    <option value="1">1 - up to 10 days</option>
+    <option value="2">2 - up to 5 days</option>
+    <option value="3">3 - up to 2 days</option>
+  <input class="btn btn-primary" type="submit" value="Submit">
+  {% endblock %}

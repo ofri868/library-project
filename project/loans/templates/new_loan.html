@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+{% block title %}Index{% endblock %}
+{% block head %}
+  {{ super() }}
+  <style type="text/css">
+    .important { color: #336699; }
+  </style>
+{% endblock %}
+{% block content %}
+<form action="/loans/add/" method="post">
+    <label for="customerid">Customer ID:</label><br>
+    <input required="true" type="number" name="customerid"><br>
+    <label for="bookid">Book ID:</label><br>
+    <input required="true" type="number" name="bookid"><br>
+    <label for="loandate">Loan Date:</label><br>
+    <input required="true" type="date" name="loandate">
+    <input class="btn btn-primary" type="submit" value="Submit">
+{% endblock %}

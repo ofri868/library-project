@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+{% block title %}Index{% endblock %}
+{% block head %}
+  {{ super() }}
+  <style type="text/css">
+    .important { color: #336699; }
+  </style>
+{% endblock %}
+{% block content %}
+<form action="/loans/new_loan/" method="post">
+    <label for="loanid">Loan ID:</label><br>
+    <input type="number" name="loanid"><br>
+    <input type="submit" value="Submit">
+{% endblock %}

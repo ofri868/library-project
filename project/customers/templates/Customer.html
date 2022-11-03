@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+{% block title %}Index{% endblock %}
+{% block head %}
+{{ super() }}
+<style type="text/css">
+  .important {
+    color: #336699;
+  }
+</style>
+{% endblock %}
+{% block content %}
+<h1>Customers</h1>
+<div class="row row-cols-1 row-cols-md-4 g-4">
+  <div class="col">
+    <div class="card">
+      <div class="card-body">
+        <h3 class="card-title">{{customer.customer_name}}</h3>
+        <p class="card-text">{{customer.age}}, {{customer.city}}</p>
+        <a class="btn btn-danger" href="/customers/delete/{{customer.customer_id}}">Delete</a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

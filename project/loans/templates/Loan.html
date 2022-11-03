@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+{% block title %}Loan{% endblock %}
+{% block head %}
+{{ super() }}
+<style type="text/css">
+  .important {
+    color: #336699;
+  }
+</style>
+{% endblock %}
+{% block content %}
+<h1>Loans</h1>
+<div class="row row-cols-1 row-cols-md-4 g-4">
+  <div class="col">
+    <div class="card">
+      <div class="card-body">
+        {%- if loan.book_id != none %}<h3 class="card-title">{{loan.book.book_name}}</h3>
+        {%- else %}<h3 class="card-title">Book deleted</h3>{% endif %}
+        <p class="card-text">Loaned by: {{loan.customer.customer_name}}<br>Author: {{loan.book.author}}<br>Loan Date:
+          {{loan.loandate}}<br>Return Date: {{loan.returndate}}</p>
+        <a class="btn btn-success" href="/loans/return/{{loan.loan_id}}">Return</a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

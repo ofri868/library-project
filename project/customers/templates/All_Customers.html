@@ -1,0 +1,50 @@
+{% extends "layout.html" %}
+{% block title %} Customers {% endblock %}
+{% block head %}
+{{ super() }}
+<style type="text/css">
+  .important {
+    color: #336699;
+  }
+</style>
+{% endblock %}
+{% block content %}
+{%- if inactive == True %}
+<p class="header">Inactive Customers</p>
+{% else %}
+<p class="header">Customers</p>
+{% endif %}
+<form action="/customers/find/" method="post">
+  <label for="customername">Customer name:</label><br>
+  <input required="true" type="text" name="customername">
+  <input class="btn btn-primary" type="submit" value="Search"><br><br>
+{%- if deleted == True %}
+<h4 class="important">Customer deleted</h4>
+{% endif %}
+{%- if not_found == True %}
+<h4 class="error">Customer not found</h4>
+{% endif %}
+{%- if cant_delete == True %}
+<h4 class="error">Can't delete customer, customer has active loans</h4>
+{% endif %}
+<a class="btn btn-info" href="/customers/add/">Add new customer</a>
+{%- if inactive == True %}
+<a class="btn btn-secondary" href="/customers/">Active customers</a><br><br>
+{% else %}
+<a class="btn btn-secondary" href="/customers/-1">Inactive customers</a><br><br>
+{% endif %}
+<div class="row row-cols-1 row-cols-md-4 g-4">
+  {%- for customer in customers %}
+  <div class="col">
+    <div class="card">
+      <img src="https://picsum.photos/20{{book.book_id}}" class="card-img-top">
+      <div class="card-body">
+        <h3 class="card-title">{{customer.customer_name}}</h3>
+        <p class="card-title">{{customer.age}}, {{customer.city}}</p>
+        <a class="btn btn-danger" href="/customers/delete/{{customer.customer_id}}">Delete</a>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}

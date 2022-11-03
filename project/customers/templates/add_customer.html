@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+{% block title %}Index{% endblock %}
+{% block head %}
+{{ super() }}
+<style type="text/css">
+  .important {
+    color: #336699;
+  }
+</style>
+{% endblock %}
+{% block content %}
+<form action="/customers/add/" method="post">
+  <label for="customername">Customer name:</label><br>
+  <input required="true" type="text" name="customername"><br>
+  <label for="city">City:</label><br>
+  <input required="true" type="text" name="city"><br>
+  <label for="age">Age:</label><br>
+  <input required="true" type="number" name="age"><br>
+  <input class="btn btn-primary" type="submit" value="Submit">
+  {% endblock %}
