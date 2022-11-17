@@ -8,6 +8,6 @@ def index():
     return render_template('index.html') 
 
 @core.route("/test")
-def index():
+def test():
     print('{"name":"ofri", "age": 21}')
     return '{"name":"ofri", "age": 21}'
