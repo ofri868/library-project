@@ -11,7 +11,7 @@
 <body>
     <p id="test"></p>
     <script>
-        const MYSERVER = "https://library-project.onrender.com/"
+        const MYSERVER = "https://library-project.onrender.com/test"
         const loadBooks = async () => {
             let arr = await fetch(MYSERVER).then(response => response.json())
             test.INNERhtml=arr
